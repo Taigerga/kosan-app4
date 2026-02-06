@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan Bulanan SP - Dashboard Pemilik')
+@section('title', 'Laporan Keuangan - Dashboard Pemilik')
 
 @section('content')
 <div class="container mx-auto px-4 py-6">
@@ -8,8 +8,8 @@
     <div class="mb-8">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Laporan Bulanan (Stored Procedure)</h1>
-                <p class="text-slate-400">Data laporan keuangan bulanan diambil menggunakan MySQL Stored Procedure</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Laporan Keuangan Bulanan</h1>
+                <p class="text-slate-400">Pantau keuangan dan transaksi bisnis kos Anda</p>
             </div>
             <div class="bg-gradient-to-r from-pink-900/30 to-rose-900/30 border border-pink-700/30 rounded-xl p-4">
                 <div class="text-sm text-pink-300 mb-1">Total Pendapatan</div>
@@ -53,22 +53,23 @@
     <div class="bg-gradient-to-r from-pink-900/20 to-rose-900/20 border border-pink-700/30 rounded-2xl p-6 mb-8">
         <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-pink-500/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
-                <i class="fas fa-database text-pink-400"></i>
+                <i class="fas fa-chart-line text-pink-400"></i>
             </div>
             <div>
-                <h3 class="text-lg font-semibold text-white mb-2">Stored Procedure: sp_laporan_bulanan_pemilik()</h3>
+                <h3 class="text-lg font-semibold text-white mb-2">Laporan Keuangan</h3>
+                <p class="text-slate-400 mb-3">Halaman ini menampilkan laporan keuangan bulanan untuk membantu Anda memantau kondisi finansial bisnis kos Anda.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Procedure</div>
-                        <div class="font-mono text-green-400">sp_laporan_bulanan_pemilik()</div>
+                        <div class="text-sm text-slate-400 mb-1">Periode</div>
+                        <div class="text-white">{{ $bulan ? \Carbon\Carbon::create()->month($bulan)->locale('id')->monthName : 'Semua Bulan' }} {{ $tahun ?? '' }}</div>
                     </div>
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Parameter 1</div>
-                        <div class="text-white">id_pemilik = {{ Auth::guard('pemilik')->user()->id_pemilik }}</div>
+                        <div class="text-sm text-slate-400 mb-1">Total Data</div>
+                        <div class="text-white">{{ count($laporan) }} kos</div>
                     </div>
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Parameter 2 & 3</div>
-                        <div class="text-white">tahun = {{ $tahun ?? 'NULL' }}, bulan = {{ $bulan ?? 'NULL' }}</div>
+                        <div class="text-sm text-slate-400 mb-1">Status</div>
+                        <div class="text-green-400">Data tersedia</div>
                     </div>
                 </div>
             </div>
@@ -114,7 +115,7 @@
     <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-700 bg-slate-900/50">
             <div class="flex items-center justify-between">
-                <h2 class="text-lg font-semibold text-white">Laporan Bulanan per Kos</h2>
+                <h2 class="text-lg font-semibold text-white">Laporan per Kos</h2>
                 <div class="text-sm text-slate-400">
                     Total: <span class="font-bold text-white">{{ count($laporan) }} Data</span>
                 </div>
@@ -242,7 +243,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <i class="fas fa-info-circle"></i>
-                    <span>Data diambil dari SP sp_laporan_bulanan_pemilik()</span>
+                    <span>Data keuangan aktual</span>
                 </div>
             </div>
         </div>
@@ -255,8 +256,7 @@
             <div class="h-64 flex items-center justify-center">
                 <div class="text-center text-slate-500">
                     <i class="fas fa-chart-pie text-4xl mb-3"></i>
-                    <p>Chart akan ditampilkan di sini</p>
-                    <p class="text-sm">(Integrasi chart library seperti Chart.js)</p>
+                    <p>Visualisasi data akan ditampilkan di sini</p>
                 </div>
             </div>
         </div>
@@ -266,8 +266,7 @@
             <div class="h-64 flex items-center justify-center">
                 <div class="text-center text-slate-500">
                     <i class="fas fa-chart-line text-4xl mb-3"></i>
-                    <p>Chart akan ditampilkan di sini</p>
-                    <p class="text-sm">(Menampilkan trend bulanan)</p>
+                    <p>Visualisasi trend akan ditampilkan di sini</p>
                 </div>
             </div>
         </div>
@@ -278,7 +277,7 @@
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
                 <h3 class="text-lg font-semibold text-white mb-2">Ekspor Laporan</h3>
-                <p class="text-slate-400">Ekspor data laporan ke format lain</p>
+                <p class="text-slate-400">Simpan atau cetak laporan untuk keperluan administrasi</p>
             </div>
             <div class="flex gap-3">
                 <button class="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors flex items-center gap-2">
@@ -307,12 +306,12 @@
         <a href="{{ route('pemilik.procedure.analisis') }}" 
            class="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 flex items-center justify-center gap-2">
             <i class="fas fa-chart-bar"></i>
-            <span>Analisis SP</span>
+            <span>Analisis Data</span>
         </a>
         <a href="{{ route('pemilik.view.kos-analisis') }}" 
            class="px-6 py-3 bg-slate-800 border border-slate-700 text-white font-semibold rounded-xl hover:border-emerald-500 hover:text-emerald-300 transition-all duration-300 flex items-center justify-center gap-2">
-            <i class="fas fa-eye"></i>
-            <span>Lihat Versi VIEW</span>
+            <i class="fas fa-table"></i>
+            <span>Tabel Data</span>
         </a>
     </div>
 </div>

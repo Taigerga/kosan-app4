@@ -169,15 +169,15 @@
                             <a href="{{ route('public.view.ringkasan') }}"
                                 class="flex items-center gap-2 px-3 py-2 rounded-lg font-medium {{ request()->routeIs('public.view.ringkasan') ? 'bg-blue-900/30 text-blue-300' : 'text-slate-400 hover:text-slate-100 hover:bg-slate-700/50' }}">
                                 <i class="fas fa-chart-pie w-5"></i>
-                                <span>Statistik</span>
+                                <span>Ringkasan</span>
                             </a>
                             <a href="{{ route('public.procedure.ringkasan') }}"
                                 class="flex items-center gap-2 px-3 py-2 rounded-lg font-medium {{ request()->routeIs('public.procedure.ringkasan') ? 'bg-blue-900/30 text-blue-300' : 'text-slate-400 hover:text-slate-100 hover:bg-slate-700/50' }}">
-                                <i class="fas fa-server mr-1"></i>Stored Procedure
+                                <i class="fas fa-server mr-1"></i><span>Statistik</span>
                             </a>
                             <a href="{{ route('public.function.demo') }}"
                                 class="flex items-center gap-2 px-3 py-2 rounded-lg font-medium {{ request()->routeIs('public.function.demo') ? 'bg-blue-900/30 text-blue-300' : 'text-slate-400 hover:text-slate-100 hover:bg-slate-700/50' }}">
-                                <i class="fa-solid fa-database mr-1"></i>Stored Function
+                                <i class="fa-solid fa-database mr-1"></i><span>Daftar Kos</span>
                             </a>
                         </nav>
                     </div>

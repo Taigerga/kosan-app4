@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Detail SP - Dashboard Penghuni')
+@section('title', 'Detail Kontrak - Dashboard Penghuni')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
+<div class="space-y-6">
     <!-- Header -->
-    <div class="mb-8">
+    <div class="bg-gradient-to-r from-green-900/50 to-emerald-900/50 border border-green-800/30 rounded-2xl p-6 mb-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Detail Kontrak (Stored Procedure)</h1>
-                <p class="text-slate-400">Data diambil menggunakan MySQL Stored Procedure sp_detail_penghuni()</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">
+                <i class="fa-solid fa-database mr-2"></i>    
+                Detail Kontrak Saya</h1>
+                <p class="text-slate-400">Lihat informasi lengkap kontrak dan pembayaran Anda</p>
             </div>
             @if($summary['total_kontrak'] > 0)
             <div class="bg-gradient-to-r from-emerald-900/30 to-green-900/30 border border-emerald-700/30 rounded-xl p-4">
@@ -25,7 +27,7 @@
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
                 <h3 class="text-lg font-semibold text-white mb-2">Filter Status Kontrak</h3>
-                <p class="text-sm text-slate-400">Pilih status kontrak untuk difilter</p>
+                <p class="text-sm text-slate-400">Pilih status kontrak untuk melihat data</p>
             </div>
             <div class="flex gap-2">
                 <a href="{{ route('penghuni.procedure.detail') }}" 
@@ -45,29 +47,29 @@
     </div>
 
     <!-- Info Box -->
-    <div class="bg-gradient-to-r from-emerald-900/20 to-green-900/20 border border-emerald-700/30 rounded-2xl p-6 mb-8">
-        <div class="flex items-start gap-4">
-            <div class="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
-                <i class="fas fa-database text-emerald-400"></i>
-            </div>
-            <div>
-                <h3 class="text-lg font-semibold text-white mb-2">Stored Procedure Parameter</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Procedure</div>
-                        <div class="font-mono text-green-400">sp_detail_penghuni()</div>
-                    </div>
-                    <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Parameter</div>
-                        <div class="text-white">
-                            id_penghuni = {{ Auth::guard('penghuni')->user()->id_penghuni }}, 
-                            status = {{ $statusKontrak ?? 'NULL' }}
-                        </div>
-                    </div>
+<div class="bg-gradient-to-r from-emerald-900/20 to-green-900/20 border border-emerald-700/30 rounded-2xl p-6 mb-8">
+    <div class="flex flex-col items-center gap-4">
+        <div class="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-info-circle text-emerald-400 text-xl"></i>
+        </div>
+        
+        <div class="text-center w-full">
+            <h3 class="text-lg font-semibold text-white mb-2">Informasi Kontrak Lengkap</h3>
+            <p class="text-slate-400 mb-6 max-w-md mx-auto">Halaman ini menampilkan detail lengkap kontrak Anda termasuk periode, pembayaran, dan fasilitas.</p>
+            
+            <div class="grid grid-cols-2 gap-4 max-w-lg mx-auto">
+                <div class="bg-slate-900/50 border border-slate-700/30 rounded-xl p-3 flex flex-col items-center justify-center">
+                    <div class="text-xs md:text-sm text-slate-400 mb-1">Total Kontrak</div>
+                    <div class="text-white font-bold">{{ $summary['total_kontrak'] }}</div>
+                </div>
+                <div class="bg-slate-900/50 border border-slate-700/30 rounded-xl p-3 flex flex-col items-center justify-center">
+                    <div class="text-xs md:text-sm text-slate-400 mb-1">Status Filter</div>
+                    <div class="text-white font-bold">{{ ucfirst($statusKontrak ?? 'Semua') }}</div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     @if($data->count() > 0)
     <!-- Summary Cards -->
@@ -106,7 +108,7 @@
     </div>
 
     <!-- Kontrak Cards -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div class="rounded-2xl gap-6 mb-8 ">
         @foreach($data as $item)
         <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden">
             <!-- Card Header -->
@@ -265,8 +267,8 @@
         </a>
         <a href="{{ route('penghuni.view.kontrak-saya') }}" 
            class="px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-500 text-white font-semibold rounded-xl hover:from-emerald-600 hover:to-green-600 transition-all duration-300 flex items-center justify-center gap-2">
-            <i class="fas fa-eye"></i>
-            <span>Lihat Versi VIEW</span>
+            <i class="fas fa-table"></i>
+            <span>Tabel Kontrak</span>
         </a>
     </div>
 </div>

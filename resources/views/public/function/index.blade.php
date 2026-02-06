@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Demo Stored Function - AyoKos')
+@section('title', 'Fitur Pencarian - AyoKos')
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
@@ -8,11 +8,11 @@
     <div class="mb-8 text-center">
         <div class="flex items-center justify-center gap-3 mb-4">
             <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-xl flex items-center justify-center">
-                <i class="fa-solid fa-database text-white text-xl"></i>
+                <i class="fa-solid fa-search text-white text-xl"></i>
             </div>
             <div>
-                <h1 class="text-3xl font-bold text-white">Demo Stored Function</h1>
-                <p class="text-slate-400">Menggunakan MySQL Stored Function untuk perhitungan</p>
+                <h1 class="text-3xl font-bold text-white">Cari & Hitung Data Kos</h1>
+                <p class="text-slate-400">Temukan kos terbaik dan lihat informasi lengkapnya</p>
             </div>
         </div>
     </div>
@@ -21,24 +21,24 @@
     <div class="bg-gradient-to-r from-cyan-900/20 to-teal-900/20 border border-cyan-700/30 rounded-2xl p-6 mb-8">
         <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
-                <i class="fas fa-info-circle text-cyan-400"></i>
+                <i class="fas fa-lightbulb text-cyan-400"></i>
             </div>
             <div>
-                <h3 class="text-lg font-semibold text-white mb-2">Apa itu Stored Function?</h3>
+                <h3 class="text-lg font-semibold text-white mb-2">Fitur Pencarian Cerdas</h3>
                 <p class="text-slate-400 mb-3">
-                    Stored Function adalah fungsi yang disimpan di database MySQL dan dapat mengembalikan nilai tunggal.
-                    Berbeda dengan Stored Procedure yang bisa mengembalikan multiple rows, Function selalu mengembalikan single value.
+                    Gunakan fitur pencarian untuk menemukan informasi kos dengan cepat.
+                    Anda bisa melihat rating kos dan ketersediaan kamar di setiap kota.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Fungsi Publik 1</div>
-                        <div class="font-mono text-green-400">sf_rating_kos(id_kos)</div>
-                        <div class="text-xs text-slate-500 mt-1">Mengembalikan rating rata-rata kos</div>
+                        <div class="text-sm text-slate-400 mb-1">Cek Rating</div>
+                        <div class="font-mono text-cyan-400">Rating Kos</div>
+                        <div class="text-xs text-slate-500 mt-1">Lihat rating rata-rata dari penghuni</div>
                     </div>
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Fungsi Publik 2</div>
-                        <div class="font-mono text-green-400">sf_kamar_tersedia_kota(kota)</div>
-                        <div class="text-xs text-slate-500 mt-1">Mengembalikan jumlah kamar tersedia di kota</div>
+                        <div class="text-sm text-slate-400 mb-1">Cek Ketersediaan</div>
+                        <div class="font-mono text-cyan-400">Kamar per Kota</div>
+                        <div class="text-xs text-slate-500 mt-1">Lihat jumlah kamar tersedia di kota</div>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
         <!-- Cek Rating Kos -->
         <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6">
             <h3 class="text-lg font-semibold text-white mb-4">Cek Rating Kos</h3>
-            <p class="text-slate-400 mb-4">Gunakan stored function <code class="text-cyan-400">sf_rating_kos()</code> untuk menghitung rating</p>
+            <p class="text-slate-400 mb-4">Lihat rating dan ulasan dari penghuni kos</p>
             
             <form id="formCekRating" class="mb-4">
                 @csrf
@@ -64,7 +64,7 @@
                 </div>
                 <button type="button" onclick="cekRating()" 
                         class="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-teal-600 transition-all duration-300">
-                    <i class="fas fa-calculator mr-2"></i>Hitung Rating
+                    <i class="fas fa-star mr-2"></i>Lihat Rating
                 </button>
             </form>
             
@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="text-xs text-slate-500 mt-2">
-                    Diambil menggunakan: <code class="text-cyan-400">SELECT sf_rating_kos(id_kos)</code>
+                    Berdasarkan ulasan penghuni
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
         <!-- Cek Kamar Tersedia di Kota -->
         <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6">
             <h3 class="text-lg font-semibold text-white mb-4">Cek Kamar Tersedia per Kota</h3>
-            <p class="text-slate-400 mb-4">Gunakan stored function <code class="text-cyan-400">sf_kamar_tersedia_kota()</code></p>
+            <p class="text-slate-400 mb-4">Lihat jumlah kamar yang masih tersedia di setiap kota</p>
             
             <form id="formCekKota" class="mb-4">
                 @csrf
@@ -102,7 +102,7 @@
                 </div>
                 <button type="button" onclick="cekKota()" 
                         class="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-teal-600 transition-all duration-300">
-                    <i class="fas fa-search mr-2"></i>Cek Ketersediaan
+                    <i class="fas fa-search-location mr-2"></i>Cek Ketersediaan
                 </button>
             </form>
             
@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div class="text-xs text-slate-500 mt-2">
-                    Diambil menggunakan: <code class="text-cyan-400">SELECT sf_kamar_tersedia_kota('kota')</code>
+                    Tersedia untuk disewa
                 </div>
             </div>
         </div>
@@ -126,8 +126,8 @@
 
     <!-- Data Kos dengan Rating -->
     <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 mb-8">
-        <h3 class="text-lg font-semibold text-white mb-4">Data Kos dengan Rating (Stored Function)</h3>
-        <p class="text-slate-400 mb-6">Rating dihitung menggunakan stored function <code class="text-cyan-400">sf_rating_kos()</code></p>
+        <h3 class="text-lg font-semibold text-white mb-4">Daftar Kos Terdaftar</h3>
+        <p class="text-slate-400 mb-6">Lihat informasi lengkap kos yang tersedia di platform kami</p>
         
         <div class="overflow-x-auto">
             <table class="w-full">
@@ -135,7 +135,7 @@
                     <tr class="bg-slate-900/30">
                         <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Nama Kos</th>
                         <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Lokasi</th>
-                        <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Rating (SF)</th>
+                        <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Rating</th>
                         <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Status Kamar</th>
                         <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Aksi</th>
                     </tr>
@@ -189,7 +189,7 @@
                         <td class="py-4 px-6">
                             <button onclick="cekRatingKos({{ $kos->id_kos }}, '{{ $kos->nama_kos }}')"
                                     class="px-3 py-1 text-xs bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors">
-                                <i class="fas fa-calculator mr-1"></i>Hitung
+                                <i class="fas fa-star mr-1"></i>Lihat Rating
                             </button>
                         </td>
                     </tr>
@@ -201,8 +201,8 @@
 
     <!-- Kamar Tersedia per Kota -->
     <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 mb-8">
-        <h3 class="text-lg font-semibold text-white mb-4">Kamar Tersedia per Kota (Stored Function)</h3>
-        <p class="text-slate-400 mb-6">Data dihitung menggunakan stored function <code class="text-cyan-400">sf_kamar_tersedia_kota()</code></p>
+        <h3 class="text-lg font-semibold text-white mb-4">Ringkasan Ketersediaan Kamar</h3>
+        <p class="text-slate-400 mb-6">Jumlah kamar yang masih tersedia di setiap kota</p>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             @foreach($kotaKamar as $kota => $jumlah)
@@ -227,8 +227,8 @@
         </a>
         <a href="{{ route('public.procedure.ringkasan') }}" 
            class="px-6 py-3 bg-slate-800 border border-slate-700 text-white font-semibold rounded-xl hover:border-blue-500 hover:text-blue-300 transition-all duration-300 flex items-center justify-center gap-2">
-            <i class="fas fa-database"></i>
-            <span>Lihat Stored Procedure</span>
+            <i class="fas fa-chart-bar"></i>
+            <span>Lihat Statistik</span>
         </a>
     </div>
 </div>
@@ -254,7 +254,6 @@
                 
                 ratingValue.textContent = parseFloat(data.rating).toFixed(1);
                 
-                // Update stars
                 let starsHtml = '';
                 for (let i = 1; i <= 5; i++) {
                     if (i <= Math.floor(data.rating)) {
@@ -307,7 +306,6 @@
     }
     
     function cekRatingKos(idKos, namaKos) {
-        // Set value di form
         document.querySelector('select[name="id_kos"]').value = idKos;
         cekRating();
     }

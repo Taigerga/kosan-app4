@@ -10,9 +10,9 @@
             <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center">
                 <i class="fas fa-chart-pie text-white text-xl"></i>
             </div>
-            <h1 class="text-3xl font-bold text-white">Ringkasan Statistik AyoKos</h1>
+            <h1 class="text-3xl font-bold text-white">Ringkasan Platform AyoKos</h1>
         </div>
-        <p class="text-slate-400">Data statistik keseluruhan platform kos terkemuka di Indonesia</p>
+        <p class="text-slate-400">Statistik dan data overview platform kos terbaik Indonesia</p>
     </div>
 
     <!-- Stats Grid -->
@@ -117,8 +117,8 @@
             <div>
                 <h3 class="text-lg font-semibold text-white mb-2">Tentang Data Statistik</h3>
                 <p class="text-slate-400 mb-3">
-                    Data statistik ini diperbarui secara real-time dari database AyoKos. 
-                    Menampilkan informasi terkini tentang jumlah kos, kamar tersedia, 
+                    Data statistik ini diperbarui secara real-time dari sistem AyoKos.
+                    Menampilkan informasi terkini tentang jumlah kos, kamar tersedia,
                     dan aktivitas pengguna di platform kami.
                 </p>
                 <div class="flex items-center gap-4 text-sm text-slate-500">
@@ -127,8 +127,8 @@
                         <span>Diperbarui: {{ now()->format('d M Y H:i') }}</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <i class="fas fa-database"></i>
-                        <span>Data langsung dari MySQL VIEW</span>
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span>Data akurat dan terpercaya</span>
                     </div>
                 </div>
             </div>

@@ -8,8 +8,8 @@
     <div class="mb-8">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Analisis Data Kos</h1>
-                <p class="text-slate-400">Detail analisis semua kos milik Anda dalam format tabel</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Data Analisis Kos</h1>
+                <p class="text-slate-400">Lihat data lengkap semua kos milik Anda dalam format tabel</p>
             </div>
             <div class="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border border-blue-700/30 rounded-xl p-4">
                 <div class="text-sm text-blue-300 mb-1">Total Pendapatan Bulan Ini</div>
@@ -139,7 +139,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <i class="fas fa-info-circle"></i>
-                    <span>Data diambil dari VIEW v_dashboard_pemilik</span>
+                    <span>Data aktual dari sistem</span>
                 </div>
             </div>
         </div>

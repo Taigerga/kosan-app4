@@ -2,7 +2,7 @@
 
 @section('title', 'Kebijakan Privasi - AyoKos')
 @section('content')
-<div class="dashboard-container">
+<div class="max-w-4xl mx-auto">
     <div class="max-w-4xl mx-auto">
         <!-- Header Section -->
         <div class="text-center mb-12">
@@ -12,10 +12,7 @@
             <p class="text-lg text-dark-muted max-w-2xl mx-auto">
                 Kami menghargai privasi Anda dan berkomitmen untuk melindungi data pribadi yang Anda berikan.
             </p>
-            <div class="mt-4 text-sm text-primary-300 bg-primary-900/30 px-4 py-2 rounded-full inline-block">
-                <i class="fas fa-calendar-alt mr-2"></i>
-                Terakhir diperbarui: {{ date('d F Y') }}
-            </div>
+
         </div>
 
         <!-- Privacy Content -->

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Demo Stored Function - Dashboard Pemilik')
+@section('title', 'Analisis Bisnis - Dashboard Pemilik')
 
 @section('content')
 <div class="container mx-auto px-4 py-6">
@@ -8,8 +8,8 @@
     <div class="mb-8">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Demo Stored Function Pemilik</h1>
-                <p class="text-slate-400">Menggunakan MySQL Stored Function untuk analisis bisnis</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Analisis Bisnis Kos Anda</h1>
+                <p class="text-slate-400">Pantau performa dan statistik bisnis kos Anda secara real-time</p>
             </div>
             <div class="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border border-blue-700/30 rounded-xl p-4">
                 <div class="text-sm text-blue-300 mb-1">Pendapatan Bulan Ini</div>
@@ -22,25 +22,26 @@
     <div class="bg-gradient-to-r from-blue-900/20 to-indigo-900/20 border border-blue-700/30 rounded-2xl p-6 mb-8">
         <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
-                <i class="fas fa-info-circle text-blue-400"></i>
+                <i class="fas fa-lightbulb text-blue-400"></i>
             </div>
             <div>
-                <h3 class="text-lg font-semibold text-white mb-2">Stored Function untuk Pemilik</h3>
+                <h3 class="text-lg font-semibold text-white mb-2">Fitur Analisis Bisnis</h3>
+                <p class="text-slate-400 mb-3">Gunakan fitur perhitungan otomatis untuk melihat statistik bisnis kos Anda dengan mudah dan akurat.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Fungsi 1</div>
-                        <div class="font-mono text-green-400">sf_pendapatan_bulan_ini()</div>
-                        <div class="text-xs text-slate-500 mt-1">Hitung pendapatan bulan ini</div>
+                        <div class="text-sm text-slate-400 mb-1">Pendapatan</div>
+                        <div class="font-medium text-cyan-400">Perhitungan Otomatis</div>
+                        <div class="text-xs text-slate-500 mt-1">Hitung pendapatan bulan berjalan</div>
                     </div>
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Fungsi 2</div>
-                        <div class="font-mono text-green-400">sf_persentase_okupansi()</div>
-                        <div class="text-xs text-slate-500 mt-1">Hitung persentase okupansi kos</div>
+                        <div class="text-sm text-slate-400 mb-1">Okupansi</div>
+                        <div class="font-medium text-cyan-400">Tingkat Penghunian</div>
+                        <div class="text-xs text-slate-500 mt-1">Persentase kamar yang terisi</div>
                     </div>
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Fungsi 3</div>
-                        <div class="font-mono text-green-400">sf_rata_durasi_sewa()</div>
-                        <div class="text-xs text-slate-500 mt-1">Hitung rata-rata durasi sewa</div>
+                        <div class="text-sm text-slate-400 mb-1">Durasi Sewa</div>
+                        <div class="font-medium text-cyan-400">Rata-rata Durasi</div>
+                        <div class="text-xs text-slate-500 mt-1">Hitung rata-rata durasi kontrak</div>
                     </div>
                 </div>
             </div>
@@ -57,7 +58,7 @@
             <div class="text-xl font-bold text-white">{{ $summary['pendapatan_bulan_ini'] }}</div>
             <button onclick="hitungPendapatan()" 
                     class="mt-2 text-xs text-blue-400 hover:text-blue-300">
-                <i class="fas fa-sync-alt mr-1"></i>Refresh
+                <i class="fas fa-sync-alt mr-1"></i>Perbarui
             </button>
         </div>
 
@@ -90,8 +91,8 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <!-- Hitung Okupansi -->
         <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h3 class="text-lg font-semibold text-white mb-4">Hitung Okupansi Kos</h3>
-            <p class="text-slate-400 mb-4">Gunakan stored function <code class="text-blue-400">sf_persentase_okupansi()</code></p>
+            <h3 class="text-lg font-semibold text-white mb-4">Cek Tingkat Penghunian</h3>
+            <p class="text-slate-400 mb-4">Lihat persentase kamar yang terisi untuk setiap kos Anda</p>
             
             <div class="mb-4">
                 <label class="block text-sm font-medium text-slate-400 mb-2">Pilih Kos</label>
@@ -103,7 +104,7 @@
             </div>
             <button onclick="hitungOkupansi()" 
                     class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
-                <i class="fas fa-calculator mr-2"></i>Hitung Okupansi
+                <i class="fas fa-chart-pie mr-2"></i>Cek Okupansi
             </button>
             
             <div id="hasilOkupansi" class="hidden mt-4 bg-slate-900/50 rounded-xl p-4">
@@ -124,46 +125,50 @@
                     </div>
                 </div>
                 <div class="text-xs text-slate-500">
-                    Diambil menggunakan: <code class="text-blue-400">SELECT sf_persentase_okupansi(id_kos)</code>
+                    Persentase kamar yang terisi
                 </div>
             </div>
         </div>
 
-        <!-- Info Stored Function -->
+        <!-- Panduan -->
         <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h3 class="text-lg font-semibold text-white mb-4">Cara Penggunaan Stored Function</h3>
+            <h3 class="text-lg font-semibold text-white mb-4">Panduan Analisis</h3>
             <div class="space-y-4">
                 <div class="bg-slate-900/50 rounded-xl p-4">
-                    <div class="text-sm text-slate-400 mb-1">Contoh Query 1</div>
-                    <div class="font-mono text-sm text-green-400 bg-black/30 p-2 rounded">
-                        SELECT sf_pendapatan_bulan_ini({{ $pemilikId }}) AS pendapatan;
-                    </div>
-                </div>
-                <div class="bg-slate-900/50 rounded-xl p-4">
-                    <div class="text-sm text-slate-400 mb-1">Contoh Query 2</div>
-                    <div class="font-mono text-sm text-green-400 bg-black/30 p-2 rounded">
-                        SELECT nama_kos, sf_persentase_okupansi(id_kos) AS okupansi<br>
-                        FROM kos WHERE id_pemilik = {{ $pemilikId }};
-                    </div>
-                </div>
-                <div class="bg-slate-900/50 rounded-xl p-4">
-                    <div class="text-sm text-slate-400 mb-1">Keuntungan Stored Function</div>
+                    <div class="text-sm text-slate-400 mb-1">Tips Meningkatkan Okupansi</div>
                     <ul class="text-sm text-slate-400 space-y-1">
                         <li class="flex items-center gap-2">
                             <i class="fas fa-check text-green-400 text-xs"></i>
-                            <span>Performance lebih baik</span>
+                            <span>Tawarkan promo untuk kontrak jangka panjang</span>
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fas fa-check text-green-400 text-xs"></i>
-                            <span>Reusable code</span>
+                            <span>Tingkatkan kualitas fasilitas kos</span>
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fas fa-check text-green-400 text-xs"></i>
-                            <span>Security enhanced</span>
+                            <span>Tambahkan foto kos yang menarik</span>
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fas fa-check text-green-400 text-xs"></i>
-                            <span>Consistency logic</span>
+                            <span>Responsif dalam membalas inquiry</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-slate-900/50 rounded-xl p-4">
+                    <div class="text-sm text-slate-400 mb-1">Keuntungan Analisis</div>
+                    <ul class="text-sm text-slate-400 space-y-1">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-arrow-right text-blue-400 text-xs"></i>
+                            <span>Pantau performa bisnis secara real-time</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-arrow-right text-blue-400 text-xs"></i>
+                            <span>Identifikasi kos dengan okupansi rendah</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-arrow-right text-blue-400 text-xs"></i>
+                            <span>Rencanakan strategi pemasaran yang tepat</span>
                         </li>
                     </ul>
                 </div>
@@ -173,8 +178,8 @@
 
     <!-- Data Kos dengan Okupansi -->
     <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 mb-8">
-        <h3 class="text-lg font-semibold text-white mb-4">Data Kos dengan Okupansi (Stored Function)</h3>
-        <p class="text-slate-400 mb-6">Okupansi dihitung menggunakan stored function <code class="text-blue-400">sf_persentase_okupansi()</code></p>
+        <h3 class="text-lg font-semibold text-white mb-4">Data Kos dan Tingkat Penghunian</h3>
+        <p class="text-slate-400 mb-6">Overview lengkap performa semua kos Anda</p>
         
         <div class="overflow-x-auto">
             <table class="w-full">
@@ -182,8 +187,8 @@
                     <tr class="bg-slate-900/30">
                         <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Nama Kos</th>
                         <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Lokasi</th>
-                        <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Okupansi (SF)</th>
-                        <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Rating (SF)</th>
+                        <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Tingkat Penghunian</th>
+                        <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Rating</th>
                         <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Status</th>
                         <th class="py-3 px-6 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Aksi</th>
                     </tr>
@@ -210,7 +215,7 @@
                             <div class="flex items-center gap-3">
                                 <div class="flex-1">
                                     <div class="flex justify-between text-xs text-slate-400 mb-1">
-                                        <span>Okupansi</span>
+                                        <span>Penghunian</span>
                                         <span>{{ number_format($kos->okupansi, 1) }}%</span>
                                     </div>
                                     <div class="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
@@ -247,7 +252,7 @@
                         <td class="py-4 px-6">
                             <button onclick="hitungOkupansiKos({{ $kos->id_kos }})"
                                     class="px-3 py-1 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                                <i class="fas fa-calculator mr-1"></i>Hitung
+                                <i class="fas fa-chart-pie mr-1"></i>Cek
                             </button>
                         </td>
                     </tr>
@@ -266,13 +271,13 @@
         </a>
         <a href="{{ route('pemilik.procedure.analisis') }}" 
            class="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 flex items-center justify-center gap-2">
-            <i class="fas fa-database"></i>
-            <span>Stored Procedure</span>
+            <i class="fas fa-chart-bar"></i>
+            <span>Lihat Laporan</span>
         </a>
         <a href="{{ route('pemilik.view.kos-analisis') }}" 
            class="px-6 py-3 bg-slate-800 border border-slate-700 text-white font-semibold rounded-xl hover:border-emerald-500 hover:text-emerald-300 transition-all duration-300 flex items-center justify-center gap-2">
-            <i class="fas fa-eye"></i>
-            <span>MySQL VIEW</span>
+            <i class="fas fa-list"></i>
+            <span>Tabel Data</span>
         </a>
     </div>
 </div>
@@ -298,23 +303,20 @@
                 const okupansiText = document.getElementById('okupansiText');
                 const okupansiCircle = document.getElementById('okupansiCircle');
                 
-                // Update text
                 namaKos.textContent = data.nama_kos;
                 persentase.textContent = data.okupansi.toFixed(1) + '%';
                 okupansiText.textContent = data.okupansi.toFixed(1) + '%';
                 
-                // Update circle progress
-                const circumference = 219.91; // 2 * π * r
+                const circumference = 219.91;
                 const offset = circumference - (data.okupansi / 100 * circumference);
                 okupansiCircle.style.strokeDashoffset = offset;
                 
-                // Change color based on percentage
                 if (data.okupansi >= 80) {
-                    okupansiCircle.style.stroke = '#ef4444'; // red
+                    okupansiCircle.style.stroke = '#ef4444';
                 } else if (data.okupansi >= 50) {
-                    okupansiCircle.style.stroke = '#f59e0b'; // yellow
+                    okupansiCircle.style.stroke = '#f59e0b';
                 } else {
-                    okupansiCircle.style.stroke = '#10b981'; // green
+                    okupansiCircle.style.stroke = '#10b981';
                 }
                 
                 hasilDiv.classList.remove('hidden');

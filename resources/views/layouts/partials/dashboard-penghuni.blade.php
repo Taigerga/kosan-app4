@@ -104,18 +104,18 @@
                             <!-- Tambahkan ini di penghuni dropdown -->
                             <a href="{{ route('penghuni.view.kontrak-saya') }}"
                             class="flex items-center px-4 py-2.5 text-slate-100 hover:bg-slate-700 hover:text-white transition-colors">
-                            <i class="fas fa-file-contract w-5 mr-3 text-emerald-400"></i>
-                            <span>Kontrak Saya (VIEW)</span>
+                            <i class="fa-solid fa-person w-5 mr-3 text-emerald-400"></i>
+                            <span>Data Kontrak</span>
                             </a>
                             <a href="{{ route('penghuni.procedure.detail') }}"
                                 class="flex items-center px-4 py-2.5 text-slate-100 hover:bg-slate-700 hover:text-white transition-colors">
                                 <i class="fas fa-database w-5 mr-3 text-emerald-400"></i>
-                                <span>Detail SP</span>
+                                <span>Detail Kontrak</span>
                             </a>
                             <a href="{{ route('penghuni.function.demo') }}"
                             class="flex items-center px-4 py-2.5 text-slate-100 hover:bg-slate-700 hover:text-white transition-colors">
-                            <i class="fas fa-function w-5 mr-3 text-emerald-400"></i>
-                            <span>Demo Stored Function</span>
+                            <i class="fa-solid fa-info w-5 mr-3 text-emerald-400"></i>
+                            <span>Informasi Tambahan</span>
                             </a>
                         </div>
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Analisis SP - Dashboard Pemilik')
+@section('title', 'Analisis Data - Dashboard Pemilik')
 
 @section('content')
 <div class="container mx-auto px-4 py-6">
@@ -8,8 +8,8 @@
     <div class="mb-8">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Analisis Data (Stored Procedure)</h1>
-                <p class="text-slate-400">Data diambil menggunakan MySQL Stored Procedure sp_analisis_pemilik()</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Analisis Data Kos Anda</h1>
+                <p class="text-slate-400">Lihat laporan lengkap performa dan statistik bisnis kos Anda</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-700/30 rounded-xl p-4">
                 <div class="text-sm text-purple-300 mb-1">Total Pendapatan</div>
@@ -53,22 +53,23 @@
     <div class="bg-gradient-to-r from-blue-900/20 to-indigo-900/20 border border-blue-700/30 rounded-2xl p-6 mb-8">
         <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
-                <i class="fas fa-database text-blue-400"></i>
+                <i class="fas fa-info-circle text-blue-400"></i>
             </div>
             <div>
-                <h3 class="text-lg font-semibold text-white mb-2">Stored Procedure Parameter</h3>
+                <h3 class="text-lg font-semibold text-white mb-2">Laporan Analisis Lengkap</h3>
+                <p class="text-slate-400 mb-3">Halaman ini menampilkan laporan lengkap analisis data kos Anda. Filter berdasarkan tahun dan bulan untuk melihat data spesifik.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Procedure</div>
-                        <div class="font-mono text-green-400">sp_analisis_pemilik()</div>
+                        <div class="text-sm text-slate-400 mb-1">Data Kos</div>
+                        <div class="text-white">Informasi lengkap kos Anda</div>
                     </div>
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Parameter 1</div>
-                        <div class="text-white">id_pemilik = {{ Auth::guard('pemilik')->user()->id_pemilik }}</div>
+                        <div class="text-sm text-slate-400 mb-1">Periode</div>
+                        <div class="text-white">{{ $bulan ? \Carbon\Carbon::create()->month($bulan)->locale('id')->monthName : 'Semua' }} {{ $tahun ?? 'Semua' }}</div>
                     </div>
                     <div class="bg-slate-900/50 rounded-xl p-3">
-                        <div class="text-sm text-slate-400 mb-1">Parameter 2 & 3</div>
-                        <div class="text-white">tahun = {{ $tahun ?? 'NULL' }}, bulan = {{ $bulan ?? 'NULL' }}</div>
+                        <div class="text-sm text-slate-400 mb-1">Status</div>
+                        <div class="text-green-400">Data tersedia</div>
                     </div>
                 </div>
             </div>
@@ -79,7 +80,7 @@
     <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-700 bg-slate-900/50">
             <div class="flex items-center justify-between">
-                <h2 class="text-lg font-semibold text-white">Data Kos dari SP</h2>
+                <h2 class="text-lg font-semibold text-white">Data Kos</h2>
                 <div class="text-sm text-slate-400">
                     Total: <span class="font-bold text-white">{{ count($data) }} Kos</span>
                 </div>
@@ -202,11 +203,11 @@
                         <td colspan="7" class="py-12 px-6 text-center">
                             <div class="flex flex-col items-center justify-center gap-4 text-slate-500">
                                 <div class="w-20 h-20 bg-slate-700/50 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-database text-3xl"></i>
+                                    <i class="fas fa-folder-open text-3xl"></i>
                                 </div>
                                 <div>
                                     <p class="text-lg mb-2">Tidak ada data</p>
-                                    <p class="text-sm">Stored Procedure tidak mengembalikan data untuk filter ini</p>
+                                    <p class="text-sm">Tidak ada data kos untuk periode yang dipilih</p>
                                 </div>
                             </div>
                         </td>
@@ -263,13 +264,13 @@
         </a>
         <a href="{{ route('pemilik.view.kos-analisis') }}" 
            class="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 flex items-center justify-center gap-2">
-            <i class="fas fa-eye"></i>
-            <span>Lihat Versi VIEW</span>
+            <i class="fas fa-table"></i>
+            <span>Tabel Data</span>
         </a>
         <a href="{{ route('pemilik.procedure.laporan-bulanan') }}" 
            class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 flex items-center justify-center gap-2">
             <i class="fas fa-file-invoice-dollar"></i>
-            <span>Laporan Bulanan</span>
+            <span>Laporan Keuangan</span>
         </a>
     </div>
 </div>

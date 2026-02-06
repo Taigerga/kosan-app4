@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Ringkasan SP - AyoKos')
+@section('title', 'Statistik Platform - AyoKos')
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
@@ -8,11 +8,11 @@
     <div class="mb-8 text-center">
         <div class="flex items-center justify-center gap-3 mb-4">
             <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-                <i class="fas fa-server text-white text-xl"></i>
+                <i class="fas fa-chart-pie text-white text-xl"></i>
             </div>
             <div>
-                <h1 class="text-3xl font-bold text-white">Ringkasan (Stored Procedure)</h1>
-                <p class="text-slate-400">Data statistik diambil menggunakan MySQL Stored Procedure</p>
+                <h1 class="text-3xl font-bold text-white">Statistik Platform AyoKos</h1>
+                <p class="text-slate-400">Ringkasan data dan aktivitas di platform kos kami</p>
             </div>
         </div>
     </div>
@@ -24,23 +24,19 @@
                 <i class="fas fa-info-circle text-purple-400"></i>
             </div>
             <div>
-                <h3 class="text-lg font-semibold text-white mb-2">Stored Procedure</h3>
+                <h3 class="text-lg font-semibold text-white mb-2">Tentang Statistik</h3>
                 <p class="text-slate-400 mb-3">
-                    Data ini diambil menggunakan MySQL Stored Procedure <code>sp_ringkasan_umum()</code>.
-                    Stored Procedure adalah kumpulan perintah SQL yang disimpan di database dan dapat dipanggil berulang kali.
+                    Halaman ini menampilkan ringkasan data dan statistik platform AyoKos.
+                    Data mencakup jumlah kos, kamar tersedia, pengguna aktif, dan informasi penting lainnya.
                 </p>
                 <div class="flex flex-wrap gap-4 text-sm text-slate-500">
                     <div class="flex items-center gap-2">
-                        <i class="fas fa-code"></i>
-                        <span>Prosedur: sp_ringkasan_umum()</span>
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Diperbarui: {{ now()->format('H:i:s') }}</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <i class="fas fa-clock"></i>
-                        <span>Eksekusi: {{ now()->format('H:i:s') }}</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-server"></i>
-                        <span>MySQL Stored Procedure</span>
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span>Data akurat dan terkini</span>
                     </div>
                 </div>
             </div>
@@ -57,7 +53,7 @@
                     <i class="fas fa-home text-blue-400"></i>
                 </div>
                 <span class="text-xs px-3 py-1 rounded-full bg-blue-900/30 text-blue-300">
-                    SP
+                    Aktif
                 </span>
             </div>
             <h3 class="text-lg font-semibold text-white mb-2">Total Kos Aktif</h3>
@@ -85,7 +81,7 @@
                     <i class="fas fa-bed text-green-400"></i>
                 </div>
                 <span class="text-xs px-3 py-1 rounded-full bg-green-900/30 text-green-300">
-                    SP
+                    Tersedia
                 </span>
             </div>
             <h3 class="text-lg font-semibold text-white mb-2">Kamar Tersedia</h3>
@@ -100,7 +96,7 @@
                     <i class="fas fa-users text-purple-400"></i>
                 </div>
                 <span class="text-xs px-3 py-1 rounded-full bg-purple-900/30 text-purple-300">
-                    SP
+                    Terdaftar
                 </span>
             </div>
             <h3 class="text-lg font-semibold text-white mb-2">Pengguna Aktif</h3>
@@ -123,10 +119,10 @@
                     <i class="fas fa-chart-line text-yellow-400"></i>
                 </div>
                 <span class="text-xs px-3 py-1 rounded-full bg-yellow-900/30 text-yellow-300">
-                    SP
+                    30 Hari
                 </span>
             </div>
-            <h3 class="text-lg font-semibold text-white mb-2">Finansial & Ulasan</h3>
+            <h3 class="text-lg font-semibold text-white mb-2">Finansial & Rating</h3>
             <div class="space-y-3">
                 <div>
                     <div class="text-xl font-bold text-white">{{ $ringkasan->total_pendapatan_30hari }}</div>
@@ -156,32 +152,32 @@
                 </div>
                 <h3 class="text-lg font-semibold text-white">Kota Terpopuler</h3>
             </div>
-            <p class="text-slate-400 mb-2">Kota dengan jumlah kos terbanyak:</p>
+            <p class="text-slate-400 mb-2">Kota dengan jumlah kos terbanyak di platform:</p>
             <div class="bg-slate-900/50 rounded-xl p-4">
                 <p class="text-xl font-bold text-white">{{ $ringkasan->kota_terpopuler }}</p>
             </div>
         </div>
 
-        <!-- Database Info -->
+        <!-- Ringkasan Data -->
         <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6">
             <div class="flex items-center gap-3 mb-4">
                 <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-server text-cyan-400"></i>
+                    <i class="fas fa-database text-cyan-400"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-white">Database Information</h3>
+                <h3 class="text-lg font-semibold text-white">Informasi Data</h3>
             </div>
             <div class="space-y-3">
                 <div class="flex items-center justify-between">
-                    <span class="text-slate-400">Stored Procedure:</span>
-                    <span class="text-green-400 font-mono">sp_ringkasan_umum()</span>
+                    <span class="text-slate-400">Status Data:</span>
+                    <span class="text-green-400 font-medium">Tersedia</span>
                 </div>
                 <div class="flex items-center justify-between">
-                    <span class="text-slate-400">Eksekusi:</span>
+                    <span class="text-slate-400">Terakhir Diperbarui:</span>
                     <span class="text-white">{{ now()->format('d M Y H:i:s') }}</span>
                 </div>
                 <div class="flex items-center justify-between">
-                    <span class="text-slate-400">Metode:</span>
-                    <span class="text-yellow-400">MySQL CALL</span>
+                    <span class="text-slate-400">Tipe Query:</span>
+                    <span class="text-yellow-400">Langsung</span>
                 </div>
             </div>
         </div>
@@ -190,10 +186,10 @@
     <!-- Empty State -->
     <div class="bg-slate-800 border border-slate-700 rounded-2xl p-12 text-center">
         <div class="w-20 h-20 bg-slate-700/50 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="fas fa-database text-3xl text-slate-500"></i>
+            <i class="fas fa-exclamation-triangle text-3xl text-slate-500"></i>
         </div>
         <h3 class="text-xl font-semibold text-white mb-2">Data Tidak Tersedia</h3>
-        <p class="text-slate-400 mb-6">Stored Procedure belum mengembalikan data atau terjadi kesalahan.</p>
+        <p class="text-slate-400">Maaf, data statistik belum tersedia saat ini. Silakan coba lagi nanti.</p>
     </div>
     @endif
 
@@ -207,7 +203,7 @@
         <a href="{{ route('public.view.ringkasan') }}" 
            class="px-6 py-3 bg-slate-800 border border-slate-700 text-white font-semibold rounded-xl hover:border-blue-500 hover:text-blue-300 transition-all duration-300 flex items-center justify-center gap-2">
             <i class="fas fa-eye"></i>
-            <span>Lihat Versi VIEW</span>
+            <span>Lihat Ringkasan Lain</span>
         </a>
     </div>
 </div>

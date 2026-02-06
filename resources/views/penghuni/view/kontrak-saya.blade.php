@@ -3,13 +3,15 @@
 @section('title', 'Kontrak Saya - Dashboard Penghuni')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
+<div class="space-y-6">
     <!-- Header -->
-    <div class="mb-8">
+    <div class="bg-gradient-to-r from-green-900/50 to-emerald-900/50 border border-green-800/30 rounded-2xl p-6 mb-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Kontrak dan Pembayaran Saya</h1>
-                <p class="text-slate-400">Detail semua kontrak dan status pembayaran Anda</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">
+                <i class="fa-solid fa-person mr-3"></i>    
+                Kontrak dan Pembayaran Saya</h1>
+                <p class="text-slate-400">Lihat data lengkap kontrak dan status pembayaran Anda</p>
             </div>
             @if($data->count() > 0)
             <div class="bg-gradient-to-r from-emerald-900/30 to-green-900/30 border border-emerald-700/30 rounded-xl p-4">
@@ -146,7 +148,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <i class="fas fa-info-circle"></i>
-                    <span>Data diambil dari VIEW v_dashboard_penghuni</span>
+                    <span>Data aktual dari sistem</span>
                 </div>
             </div>
         </div>
