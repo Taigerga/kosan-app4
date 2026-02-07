@@ -190,6 +190,17 @@
                     @forelse($kos->kamar as $kamar)
                     <div class="bg-dark-bg/50 border border-dark-border rounded-xl p-6 hover:border-primary-500/50 transition-all duration-300">
                         <div class="flex flex-col lg:flex-row gap-6">
+                            @if($kamar->foto_kamar_url)
+                            <div class="w-full lg:w-48 h-48 lg:h-auto flex-shrink-0">
+                                <img src="{{ $kamar->foto_kamar_url }}" 
+                                     alt="Kamar {{ $kamar->nomor_kamar }}" 
+                                     class="w-full h-full object-cover rounded-xl">
+                            </div>
+                            @else
+                            <div class="w-full lg:w-48 h-48 lg:h-auto flex-shrink-0 bg-gradient-to-br from-dark-border to-dark-bg rounded-xl flex items-center justify-center">
+                                <i class="fas fa-bed text-4xl text-dark-muted"></i>
+                            </div>
+                            @endif
                             <div class="flex-1">
                                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
                                     <div>

@@ -104,22 +104,22 @@
                             <a href="{{ route('pemilik.view.kos-analisis') }}"
                                 class="flex items-center px-4 py-2.5 text-slate-100 hover:bg-slate-700 hover:text-white transition-colors">
                                 <i class="fas fa-chart-bar w-5 mr-3 text-indigo-400"></i>
-                                <span>Analisis Kos (VIEW)</span>
+                                <span>Data Kos Saya</span>
                             </a>
                             <a href="{{ route('pemilik.procedure.analisis') }}"
                                 class="flex items-center px-4 py-2.5 text-slate-100 hover:bg-slate-700 hover:text-white transition-colors">
                                 <i class="fas fa-database w-5 mr-3 text-purple-400"></i>
-                                <span>Analisis SP</span>
+                                <span>Informasi Kos</span>
                                 </a>
                                 <a href="{{ route('pemilik.procedure.laporan-bulanan') }}"
                                 class="flex items-center px-4 py-2.5 text-slate-100 hover:bg-slate-700 hover:text-white transition-colors">
-                                <i class="fas fa-file-chart-line w-5 mr-3 text-pink-400"></i>
-                                <span>Laporan Bulanan SP</span>
+                                <i class="fa-solid fa-server w-5 mr-3 text-pink-400"></i>
+                                <span>Laporan Bulanan</span>
                             </a>
                             <a href="{{ route('pemilik.function.demo') }}"
                                 class="flex items-center px-4 py-2.5 text-slate-100 hover:bg-slate-700 hover:text-white transition-colors">
-                                <i class="fas fa-function w-5 mr-3 text-cyan-400"></i>
-                                <span>Demo Stored Function</span>
+                                <i class="fa-solid fa-person w-5 mr-3 text-cyan-400"></i>
+                                <span>Tingkat Penghunian</span>
                             </a>
                         </div>
 

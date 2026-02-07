@@ -5,10 +5,12 @@
 @section('content')
 <div class="container mx-auto px-4 py-6">
     <!-- Header -->
-    <div class="mb-8">
+    <div class="bg-gradient-to-r from-primary-900/30 to-indigo-900/30 border border-primary-800/30 rounded-2xl p-6 mb-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Analisis Bisnis Kos Anda</h1>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">
+                <i class="fa-solid fa-person mr-3"></i>    
+                Analisis Bisnis Kos Anda</h1>
                 <p class="text-slate-400">Pantau performa dan statistik bisnis kos Anda secara real-time</p>
             </div>
             <div class="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border border-blue-700/30 rounded-xl p-4">
@@ -97,15 +99,24 @@
             <div class="mb-4">
                 <label class="block text-sm font-medium text-slate-400 mb-2">Pilih Kos</label>
                 <select id="selectKos" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500">
-                    @foreach($kosList as $kos)
+                    @forelse($kosList as $kos)
                     <option value="{{ $kos->id_kos }}">{{ $kos->nama_kos }}</option>
-                    @endforeach
+                    @empty
+                    <option value="">Tidak ada kos tersedia</option>
+                    @endforelse
                 </select>
             </div>
+            @if($kosList->count() > 0)
             <button onclick="hitungOkupansi()" 
                     class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
                 <i class="fas fa-chart-pie mr-2"></i>Cek Okupansi
             </button>
+            @else
+            <button disabled
+                    class="w-full px-6 py-3 bg-slate-700 text-slate-400 font-semibold rounded-xl cursor-not-allowed">
+                <i class="fas fa-chart-pie mr-2"></i>Tidak Ada Kos
+            </button>
+            @endif
             
             <div id="hasilOkupansi" class="hidden mt-4 bg-slate-900/50 rounded-xl p-4">
                 <div class="flex items-center justify-between mb-3">
@@ -285,17 +296,29 @@
 <script>
     function hitungOkupansi() {
         const idKos = document.getElementById('selectKos').value;
+        console.log('idKos:', idKos);
+        
+        if (!idKos) {
+            alert('Pilih kos terlebih dahulu!');
+            return;
+        }
+        
+        const formData = new FormData();
+        formData.append('id_kos', idKos);
         
         fetch("{{ route('pemilik.function.hitung-okupansi') }}", {
             method: 'POST',
-            body: new FormData(document.querySelector('form') || new FormData()),
+            body: formData,
             headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log('Response status:', response.status);
+            return response.json();
+        })
         .then(data => {
+            console.log('Response data:', data);
             if (data.success) {
                 const hasilDiv = document.getElementById('hasilOkupansi');
                 const namaKos = document.getElementById('namaKosOkupansi');
@@ -303,28 +326,32 @@
                 const okupansiText = document.getElementById('okupansiText');
                 const okupansiCircle = document.getElementById('okupansiCircle');
                 
+                const okupansiValue = parseFloat(data.okupansi) || 0;
+                
                 namaKos.textContent = data.nama_kos;
-                persentase.textContent = data.okupansi.toFixed(1) + '%';
-                okupansiText.textContent = data.okupansi.toFixed(1) + '%';
+                persentase.textContent = okupansiValue.toFixed(1) + '%';
+                okupansiText.textContent = okupansiValue.toFixed(1) + '%';
                 
                 const circumference = 219.91;
-                const offset = circumference - (data.okupansi / 100 * circumference);
+                const offset = circumference - (okupansiValue / 100 * circumference);
                 okupansiCircle.style.strokeDashoffset = offset;
                 
-                if (data.okupansi >= 80) {
+                if (okupansiValue >= 80) {
                     okupansiCircle.style.stroke = '#ef4444';
-                } else if (data.okupansi >= 50) {
+                } else if (okupansiValue >= 50) {
                     okupansiCircle.style.stroke = '#f59e0b';
                 } else {
                     okupansiCircle.style.stroke = '#10b981';
                 }
                 
                 hasilDiv.classList.remove('hidden');
+            } else {
+                alert('Gagal: ' + (data.message || 'Unknown error'));
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Terjadi kesalahan saat menghitung okupansi');
+            alert('Terjadi kesalahan saat menghitung okupansi: ' + error.message);
         });
     }
     
