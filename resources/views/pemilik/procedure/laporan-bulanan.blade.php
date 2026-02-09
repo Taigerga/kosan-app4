@@ -37,7 +37,7 @@
                 <select name="bulan" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-pink-500">
                     <option value="">Semua Bulan</option>
                     @for($i = 1; $i <= 12; $i++)
-                    <option value="{{ $i }}" {{ $bulan == $i ? 'selected' : '' }}>
+                    <option value="{{ $i }}" {{ (int)$bulan == $i ? 'selected' : '' }}>
                         {{ \Carbon\Carbon::create()->month($i)->locale('id')->monthName }}
                     </option>
                     @endfor
@@ -63,7 +63,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="bg-slate-900/50 rounded-xl p-3">
                         <div class="text-sm text-slate-400 mb-1">Periode</div>
-                        <div class="text-white">{{ $bulan ? \Carbon\Carbon::create()->month($bulan)->locale('id')->monthName : 'Semua Bulan' }} {{ $tahun ?? '' }}</div>
+                        <div class="text-white">{{ $bulan ? \Carbon\Carbon::create()->month((int)$bulan)->locale('id')->monthName : 'Semua Bulan' }} {{ $tahun ?? '' }}</div>
                     </div>
                     <div class="bg-slate-900/50 rounded-xl p-3">
                         <div class="text-sm text-slate-400 mb-1">Total Data</div>
